@@ -2,8 +2,6 @@
 
 A semi-automated PDF translation system using Claude Code as the translation engine.
 
-**Primary Author:** Austin Morrissey
-**Translation Assistant:** Claude (Anthropic)
 
 ## 🎯 Project Highlight: "Networking for Spies"
 

@@ -285,6 +285,6 @@ MIT License - Feel free to use and modify
 
 ## Credits
 
-Created by Austin Morrissey with assistance from Claude (Anthropic)
+Co Authored by gvmfhy & Claude Sonnet 4.5 (Anthropic) from Claude (Anthropic)
 
 Built specifically for translating "Networking for Spies" (Russian → English), but designed to be reusable for any translation project.

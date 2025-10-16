@@ -1,0 +1,124 @@
+{
+  "pdf_file": "/Users/austinmorrissey/Downloads/Networking for Spies.pdf",
+  "metadata": {
+    "total_pages": 274,
+    "title": "Нетворкинг для разведчиков. Как извлечь пользу из любого знакомства",
+    "author": "Елена Станиславовна Вавилова, Андрей Олегович Безруков"
+  },
+  "chunk_size": 20,
+  "total_chunks": 14,
+  "chunks": [
+    {
+      "chunk_num": 1,
+      "filename": "chunk_001_pages_001_020.txt",
+      "start_page": 1,
+      "end_page": 20,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 2,
+      "filename": "chunk_002_pages_021_040.txt",
+      "start_page": 21,
+      "end_page": 40,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 3,
+      "filename": "chunk_003_pages_041_060.txt",
+      "start_page": 41,
+      "end_page": 60,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 4,
+      "filename": "chunk_004_pages_061_080.txt",
+      "start_page": 61,
+      "end_page": 80,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 5,
+      "filename": "chunk_005_pages_081_100.txt",
+      "start_page": 81,
+      "end_page": 100,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 6,
+      "filename": "chunk_006_pages_101_120.txt",
+      "start_page": 101,
+      "end_page": 120,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 7,
+      "filename": "chunk_007_pages_121_140.txt",
+      "start_page": 121,
+      "end_page": 140,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 8,
+      "filename": "chunk_008_pages_141_160.txt",
+      "start_page": 141,
+      "end_page": 160,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 9,
+      "filename": "chunk_009_pages_161_180.txt",
+      "start_page": 161,
+      "end_page": 180,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 10,
+      "filename": "chunk_010_pages_181_200.txt",
+      "start_page": 181,
+      "end_page": 200,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 11,
+      "filename": "chunk_011_pages_201_220.txt",
+      "start_page": 201,
+      "end_page": 220,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 12,
+      "filename": "chunk_012_pages_221_240.txt",
+      "start_page": 221,
+      "end_page": 240,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 13,
+      "filename": "chunk_013_pages_241_260.txt",
+      "start_page": 241,
+      "end_page": 260,
+      "page_count": 20,
+      "translated": false
+    },
+    {
+      "chunk_num": 14,
+      "filename": "chunk_014_pages_261_274.txt",
+      "start_page": 261,
+      "end_page": 274,
+      "page_count": 14,
+      "translated": false
+    }
+  ]
+}

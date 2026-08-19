@@ -7,10 +7,10 @@ Author: Austin Morrissey
 Co-Authored-By: Claude <noreply@anthropic.com>
 """
 
-import json
-from pathlib import Path
 import argparse
+import json
 import sys
+from pathlib import Path
 
 
 class TranslationHelper:
@@ -29,7 +29,7 @@ class TranslationHelper:
         # Load progress
         if not self.progress_file.exists():
             print(f"Error: Progress file not found: {self.progress_file}", file=sys.stderr)
-            print(f"Run extract_pdf.py first!", file=sys.stderr)
+            print("Run extract_pdf.py first!", file=sys.stderr)
             sys.exit(1)
 
         with open(self.progress_file, 'r', encoding='utf-8') as f:
@@ -80,7 +80,7 @@ class TranslationHelper:
         # Check if already translated
         trans_file = self.translations_dir / f"chunk_{chunk_num:03d}_translation.md"
         if trans_file.exists():
-            print(f"⚠️  This chunk already has a translation at:")
+            print("⚠️  This chunk already has a translation at:")
             print(f"   {trans_file}")
             print()
 
@@ -94,7 +94,7 @@ class TranslationHelper:
             print(f"Save translation to: {trans_file}")
             print("=" * 80)
         else:
-            print(f"Error: Could not read chunk file", file=sys.stderr)
+            print("Error: Could not read chunk file", file=sys.stderr)
             return False
 
         return True
@@ -153,7 +153,7 @@ class TranslationHelper:
         next_chunk = self.get_next_chunk()
         if next_chunk:
             print(f"\nNext to translate: Chunk {next_chunk['chunk_num']} (pages {next_chunk['start_page']}-{next_chunk['end_page']})")
-            print(f"Use: python translate_helper.py --next")
+            print("Use: python translate_helper.py --next")
         else:
             print("\n✓ All chunks translated!")
             print("Run: python assemble_output.py")
@@ -190,8 +190,8 @@ def main():
     )
     parser.add_argument(
         '--project-dir',
-        default='~/pdf-translator',
-        help='Project directory (default: ~/pdf-translator)'
+        default='.',
+        help='Project directory (default: current directory)'
     )
     parser.add_argument(
         '--next',

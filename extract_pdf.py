@@ -7,11 +7,12 @@ Author: Austin Morrissey
 Co-Authored-By: Claude <noreply@anthropic.com>
 """
 
-import json
-import PyPDF2
-from pathlib import Path
 import argparse
+import json
 import sys
+from pathlib import Path
+
+import PyPDF2
 
 
 class PDFExtractor:
@@ -26,6 +27,8 @@ class PDFExtractor:
             output_dir: Directory to save chunks
             chunk_size: Number of pages per chunk
         """
+        if chunk_size < 1:
+            raise ValueError("chunk_size must be at least 1")
         self.pdf_path = Path(pdf_path)
         self.output_dir = Path(output_dir)
         self.chunk_size = chunk_size
@@ -57,7 +60,7 @@ class PDFExtractor:
             page = reader.pages[page_num]
             text = page.extract_text()
             return text.strip()
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - continue past an unreadable page
             print(f"Warning: Error extracting page {page_num + 1}: {e}")
             return ""
 
@@ -119,6 +122,11 @@ class PDFExtractor:
             reader = PyPDF2.PdfReader(f)
             total_pages = len(reader.pages)
 
+            if not 0 <= start_page < total_pages:
+                raise ValueError(
+                    f"start_page must be between 1 and {total_pages}, inclusive"
+                )
+
             print(f"Total pages: {total_pages}")
             print(f"Chunk size: {self.chunk_size} pages")
 
@@ -129,7 +137,7 @@ class PDFExtractor:
             if metadata['author']:
                 print(f"Author: {metadata['author']}")
 
-            print(f"\nExtracting chunks...")
+            print("\nExtracting chunks...")
             print("=" * 80)
 
             chunks = []
@@ -160,12 +168,12 @@ class PDFExtractor:
                 json.dump(progress, f, indent=2, ensure_ascii=False)
 
             print("=" * 80)
-            print(f"\n✓ Extraction complete!")
+            print("\n✓ Extraction complete!")
             print(f"  Total chunks created: {len(chunks)}")
             print(f"  Chunks directory: {self.chunks_dir}")
             print(f"  Progress file: {self.progress_file}")
-            print(f"\nNext step: Use Claude Code to translate chunks")
-            print(f'  Example: "translate chunk 1"')
+            print("\nNext step: Use Claude Code to translate chunks")
+            print('  Example: "translate chunk 1"')
 
 
 def main():
@@ -179,8 +187,8 @@ def main():
     )
     parser.add_argument(
         '--output-dir',
-        default='~/pdf-translator',
-        help='Output directory (default: ~/pdf-translator)'
+        default='.',
+        help='Output directory (default: current directory)'
     )
     parser.add_argument(
         '--chunk-size',
@@ -196,6 +204,11 @@ def main():
     )
 
     args = parser.parse_args()
+
+    if args.chunk_size < 1:
+        parser.error("--chunk-size must be at least 1")
+    if args.start_page < 1:
+        parser.error("--start-page must be at least 1")
 
     # Expand paths
     pdf_path = Path(args.pdf_file).expanduser()

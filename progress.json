@@ -1,10 +1,13 @@
 {
-  "pdf_file": "/Users/austinmorrissey/Downloads/Networking for Spies.pdf",
+  "pdf_file": "Networking for Spies.pdf",
   "metadata": {
     "total_pages": 274,
     "title": "Нетворкинг для разведчиков. Как извлечь пользу из любого знакомства",
-    "author": "Елена Станиславовна Вавилова, Андрей Олегович Безруков"
+    "author": "Елена Станиславовна Вавилова, Андрей Олегович Безруков",
+    "translated_title": "Networking for Spies: How to Benefit from Any Acquaintance",
+    "translated_author": "Elena Vavilova and Andrey Bezrukov"
   },
+  "output_basename": "networking_for_spies_reviewed",
   "chunk_size": 20,
   "total_chunks": 14,
   "chunks": [
@@ -14,7 +17,7 @@
       "start_page": 1,
       "end_page": 20,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 2,
@@ -22,7 +25,7 @@
       "start_page": 21,
       "end_page": 40,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 3,
@@ -30,7 +33,7 @@
       "start_page": 41,
       "end_page": 60,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 4,
@@ -38,7 +41,7 @@
       "start_page": 61,
       "end_page": 80,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 5,
@@ -46,7 +49,7 @@
       "start_page": 81,
       "end_page": 100,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 6,
@@ -54,7 +57,7 @@
       "start_page": 101,
       "end_page": 120,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 7,
@@ -62,7 +65,7 @@
       "start_page": 121,
       "end_page": 140,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 8,
@@ -70,7 +73,7 @@
       "start_page": 141,
       "end_page": 160,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 9,
@@ -78,7 +81,7 @@
       "start_page": 161,
       "end_page": 180,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 10,
@@ -86,7 +89,7 @@
       "start_page": 181,
       "end_page": 200,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 11,
@@ -94,7 +97,7 @@
       "start_page": 201,
       "end_page": 220,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 12,
@@ -102,7 +105,7 @@
       "start_page": 221,
       "end_page": 240,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 13,
@@ -110,7 +113,7 @@
       "start_page": 241,
       "end_page": 260,
       "page_count": 20,
-      "translated": false
+      "translated": true
     },
     {
       "chunk_num": 14,
@@ -118,7 +121,7 @@
       "start_page": 261,
       "end_page": 274,
       "page_count": 14,
-      "translated": false
+      "translated": true
     }
   ]
 }

@@ -1,107 +1,47 @@
-# Quick Start Guide - PDF Translation
+# Quick Start
 
-## Current Status
+## Rebuild the Reviewed Markdown and HTML
 
-✅ **System is ready!**
-- PDF extracted: 274 pages → 14 chunks
-- Progress tracking: Active
-- Ready to translate: Chunk 1
+~~~bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python assemble_output.py
+~~~
 
-## How to Translate (Simple 3-Step Process)
+The 14 files in `translations/` are the canonical reviewed English text.
 
-### Step 1: View Next Chunk
-```bash
-python3 translate_helper.py --next
-```
+## Build the Reviewed PDF
 
-This shows you the Russian text to translate.
+Install Poppler (`brew install poppler` on macOS or
+`sudo apt-get install poppler-utils` on Debian/Ubuntu), then run:
 
-### Step 2: Ask Claude Code to Translate
+~~~bash
+python scripts/extract_pdf_images.py "/path/to/Networking for Spies.pdf"
 
-In this Claude Code session, simply say:
+python scripts/build_networking_for_spies_pdf.py \
+  --translations-dir translations \
+  --image-dir assets/source_images \
+  --output output/Networking_for_Spies_Reviewed_English_Translation.pdf
 
-```
-"Translate chunk 1 to English and save it"
-```
+python scripts/verify_networking_for_spies.py \
+  --project-dir . \
+  --source-pdf "/path/to/Networking for Spies.pdf" \
+  --pdf output/Networking_for_Spies_Reviewed_English_Translation.pdf
+~~~
 
-Or for multiple chunks:
+The compiled PDF and extracted source illustrations are intentionally ignored
+by Git. Supply your own legally obtained copy of the same source edition. See
+`NOTICE.md` for the distinction between the software licence and book rights.
 
-```
-"Translate the next 3 chunks"
-```
+## Start a Different Translation Project
 
-### Step 3: Check Progress
+~~~bash
+python extract_pdf.py "/path/to/input.pdf" --output-dir "/path/to/project"
+python translate_helper.py --project-dir "/path/to/project" --next
+python assemble_output.py --project-dir "/path/to/project"
+~~~
 
-```bash
-python3 translate_helper.py --status
-```
-
-## When Translation is Complete
-
-Assemble the final book:
-
-```bash
-python3 assemble_output.py
-```
-
-This creates:
-- `output/[book_name]_english.md` - Markdown version
-- `output/[book_name]_english.html` - Styled web version
-
-## Example Translation Session
-
-```
-You: "Show translation status"
-Claude: [Shows 0/14 chunks done]
-
-You: "Translate chunk 1"
-Claude: [Reads chunk, translates, saves to translations/]
-
-You: "Continue with chunk 2"
-Claude: [Translates and saves]
-
-You: "What's our progress now?"
-Claude: [Shows 2/14 chunks done]
-
-You: "Let's do 3 more chunks"
-Claude: [Translates chunks 3, 4, 5]
-
-[Take a break - progress is saved]
-
-You: "Resume translation"
-Claude: [Starts from chunk 6]
-```
-
-## File Locations
-
-```
-~/pdf-translator/
-├── chunks/                      ← Russian source text (read-only)
-├── translations/                ← English translations (output)
-├── output/                      ← Final assembled book
-└── progress.json               ← Tracking file
-```
-
-## Quick Commands Reference
-
-| Action | Command |
-|--------|---------|
-| Check status | `python3 translate_helper.py --status` |
-| Show next chunk | `python3 translate_helper.py --next` |
-| Show specific chunk | `python3 translate_helper.py --chunk 5` |
-| Assemble final output | `python3 assemble_output.py` |
-| Check what's assembled | `python3 assemble_output.py --status` |
-
-## Ready to Start?
-
-Try:
-```
-"Show me chunk 1 to translate"
-```
-
-Then:
-```
-"Translate this chunk to English and save it"
-```
-
-That's it! The system handles the rest.
+See `README.md` for the complete workflow and
+`docs/networking_for_spies_review_guide.md` for the review methodology used
+on this book.

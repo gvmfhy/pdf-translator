@@ -5,10 +5,10 @@
 # Author: Austin Morrissey
 # Co-Authored-By: Claude <noreply@anthropic.com>
 
-PROJECT_DIR="$HOME/pdf-translator"
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 
 # Change to project directory
-cd "$PROJECT_DIR" || exit 1
+cd "$SCRIPT_DIR" || exit 1
 
 # Parse command
 case "$1" in

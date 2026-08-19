@@ -7,11 +7,10 @@ Author: Austin Morrissey
 Co-Authored-By: Claude <noreply@anthropic.com>
 """
 
-import json
-from pathlib import Path
 import argparse
+import json
 import sys
-from datetime import datetime
+from pathlib import Path
 
 
 class TranslationAssembler:
@@ -55,10 +54,14 @@ class TranslationAssembler:
     def assemble_markdown(self, output_file=None):
         """Assemble all translations into a single markdown file."""
         if output_file is None:
-            title = self.progress['metadata'].get('title', 'translation')
-            # Clean filename
-            safe_title = "".join(c for c in title if c.isalnum() or c in (' ', '-', '_')).strip()
-            safe_title = safe_title.replace(' ', '_')[:50]
+            title = (
+                self.progress['metadata'].get('translated_title')
+                or self.progress['metadata'].get('title', 'translation')
+            )
+            safe_title = self.progress.get('output_basename')
+            if not safe_title:
+                safe_title = "".join(c for c in title if c.isalnum() or c in (' ', '-', '_')).strip()
+                safe_title = safe_title.replace(' ', '_')[:50]
             output_file = self.output_dir / f"{safe_title}_english.md"
 
         translated, missing = self.get_translation_status()
@@ -67,19 +70,27 @@ class TranslationAssembler:
             print(f"Warning: {len(missing)} chunks not yet translated: {missing}")
             print(f"Assembling {len(translated)} available chunks...")
 
-        # Build document
         content = []
-
-        # Header
         metadata = self.progress['metadata']
-        content.append(f"# {metadata.get('title', 'Untitled')}")
-        content.append(f"## {metadata.get('author', 'Unknown Author')}")
-        content.append("")
-        content.append(f"**English Translation**")
-        content.append(f"*Translated: {datetime.now().strftime('%B %d, %Y')}*")
-        content.append("")
-        content.append("---")
-        content.append("")
+        first_translation = None
+        if translated:
+            first_translation = self.translations_dir / f"chunk_{translated[0]:03d}_translation.md"
+        has_embedded_frontmatter = bool(
+            first_translation
+            and first_translation.read_text(encoding='utf-8').lstrip().startswith('# ')
+        )
+        if not has_embedded_frontmatter:
+            title = metadata.get('translated_title') or metadata.get('title', 'Untitled')
+            author = metadata.get('translated_author') or metadata.get('author', 'Unknown Author')
+            content.extend([
+                f"# {title}",
+                f"## {author}",
+                "",
+                "**English Translation**",
+                "",
+                "---",
+                "",
+            ])
 
         # Assemble chunks in order
         for chunk in self.progress['chunks']:
@@ -102,7 +113,7 @@ class TranslationAssembler:
 
         # Write output
         with open(output_file, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(content))
+            f.write('\n'.join(content).rstrip() + '\n')
 
         print(f"✓ Markdown assembled: {output_file}")
         print(f"  Chunks included: {len(translated)}/{len(self.progress['chunks'])}")
@@ -134,7 +145,7 @@ class TranslationAssembler:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{self.progress['metadata'].get('title', 'Translation')}</title>
+    <title>{self.progress['metadata'].get('translated_title') or self.progress['metadata'].get('title', 'Translation')}</title>
     <style>
         body {{
             font-family: 'Georgia', 'Times New Roman', serif;
@@ -219,7 +230,7 @@ class TranslationAssembler:
         print(f"Total chunks: {len(self.progress['chunks'])}")
         print(f"Translated: {len(translated)}/{len(self.progress['chunks'])} chunks")
         print(f"Progress: {len(translated) / len(self.progress['chunks']) * 100:.1f}%")
-        print("")
+        print()
 
         if missing:
             print(f"Remaining chunks: {missing}")
@@ -236,8 +247,8 @@ def main():
     )
     parser.add_argument(
         '--project-dir',
-        default='~/pdf-translator',
-        help='Project directory (default: ~/pdf-translator)'
+        default='.',
+        help='Project directory (default: current directory)'
     )
     parser.add_argument(
         '--status',
